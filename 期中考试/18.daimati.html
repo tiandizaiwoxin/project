@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+
+</head>
+
+<body>
+    <input type="checkbox" id='all'>全选
+    <button id='btn'>反选</button>
+    <ul>
+        <li><input type="checkbox">张三</li>
+        <li><input type="checkbox">李四</li>
+        <li><input type="checkbox">麻子</li>
+    </ul>
+</body>
+<script>
+    $('#all').click(function () {
+        // $('ul li input').attr('checked', $(this)[0].checked)
+        for (var i = 0; i < $('ul li input').length; i++) {
+            $('ul li input').eq(i)[0].checked = $(this)[0].checked
+        }
+
+    })
+    $('ul li input').click(function () {
+        var flag = true
+        for (var i = 0; i < $('ul li input').length; i++) {
+            if (!$('ul li input').eq(i)[0].checked) {
+                flag = false
+                break
+            }
+        }
+        if (flag == true) {
+            $('#all')[0].checked = true
+        } else {
+            $('#all')[0].checked = false
+        }
+    })
+    $('#btn').click(function () {
+        var flag = true
+        for (var i = 0; i < $('ul li input').length; i++) {
+            if ($('ul li input').eq(i)[0].checked) {
+                $('ul li input').eq(i)[0].checked = false
+                flag = false
+            } else {
+                $('ul li input').eq(i)[0].checked = true
+            }
+        }
+        if (flag == true) {
+            $('#all')[0].checked = true
+        } else {
+            $('#all')[0].checked = false
+        }
+    })
+</script>
+
+</html>

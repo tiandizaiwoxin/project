@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <div style="margin-bottom: 15px;">
+        <input type="text" id="username" placeholder="请输入姓名">
+        <input type="text" id="sex" placeholder="请输入性别">
+        <input type="text" id="age" placeholder="请输入年龄">
+        <input type="button" value="提交" id="btn">
+    </div>
+    <table border="1" width="540">
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>操作</td>
+
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+<script>
+    var uname = document.querySelector('#username')
+    var sex = document.querySelector('#sex')
+    var age = document.querySelector('#age')
+    var btn = document.querySelector('#btn')
+    var tbody = document.querySelector('tbody')
+    btn.onclick = function () {
+        var uuname = uname.value.trim()
+        var usex = sex.value.trim()
+        var uage = age.value.trim()
+        if (uuname.length > 0 && usex.length > 0 && uage.length > 0) {
+            var obj = { uname: uuname, sex: usex, age: uage }
+            var arr = []
+            if (localStorage.uname) {
+                arr = JSON.parse(localStorage.uname)
+            }
+            arr.push(obj)
+            localStorage.uname = JSON.stringify(arr)
+            show()
+        } else {
+            alert('请将数据填写完整')
+        }
+        uname.value = ''
+        sex.value = ''
+        age.value = ''
+    }
+    $('tbody').on('click', 'a', function () {
+        var arr = JSON.parse(localStorage.uname)
+        arr.splice($(this).prop('id'), 1)
+        localStorage.uname = JSON.stringify(arr)
+        show()
+    })
+    show()
+    function show() {
+        tbody.innerHTML = ''
+        if (localStorage.uname) {
+            var arr = JSON.parse(localStorage.uname)
+            var newStr = ''
+            for (var i = 0; i < arr.length; i++) {
+                newStr += `<tr>
+                            <td>${arr[i].uname}</td>
+                            <td>${arr[i].sex}</td>
+                            <td>${arr[i].age}</td>
+                            <td><a href="javascript:;" id=${i}>删除</a></td>
+                        </tr>`
+            }
+            tbody.innerHTML = newStr
+        }
+    }
+
+
+
+
+</script>
+
+</html>

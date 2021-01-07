@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="checkbox" id='all'>全选
+    <button id='btn'>反选</button>
+    <ul>
+        <li><input type="checkbox">张三</li>
+        <li><input type="checkbox">李四</li>
+        <li><input type="checkbox">麻子</li>
+    </ul>
+    <script>
+        var checkAll = document.querySelector('#all')
+        var btn = document.querySelector('#btn')
+        var check = document.querySelectorAll('ul li input')
+        checkAll.onclick = function () {
+            for (var i = 0; i < check.length; i++) {
+                check[i].checked = this.checked
+            }
+        }
+        btn.onclick = function () {
+            for (var i = 0; i < check.length; i++) {
+                if (check[i].checked === true) {
+                    check[i].checked = false
+                } else {
+                    check[i].checked = true
+                }
+            }
+        }
+        for (var i = 0; i < check.length; i++) {
+            check[i].onclick = function () {
+                var flag = true
+                for (var i = 0; i < check.length; i++) {
+                    if (check[i].checked == false) {
+                        flag = false
+                        break
+                    }
+                }
+                if (flag == true) {
+                    checkAll.checked = true
+                } else {
+                    checkAll.checked = false
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

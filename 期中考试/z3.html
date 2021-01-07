@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<style>
+
+</style>
+
+<body>
+    <input type="checkbox" name="" id="all">全选<input type="button" value="反选" id="reAll">
+    <ul>
+        <li> <input type="checkbox" name="" id="" class="a">aa</li>
+        <li><input type="checkbox" name="" id="" class="a">bb</li>
+        <li> <input type="checkbox" name="" id="" class="a">cc</li>
+    </ul>
+</body>
+<script>
+    $("#all").on("change", function () {
+        $("ul li input").prop("checked", $(this).prop("checked"))
+    })
+    $("ul li input").on("click", function () {
+        if ($("ul li input:checked").length === $("ul li input").length) {
+            $("#all").prop("checked", true)
+        } else {
+            $("#all").prop("checked", false)
+        }
+    })
+    $("#reAll").on("click", function () {
+        var a = $("ul li input:checked")
+        a.length > 0 ? $("#all").prop('checked', false) : $("#all").prop('checked', true)
+        // if (a.length > 0) {
+        //     $("#all").prop('checked', false)
+        // } else {
+        //     $("#all").prop('checked', true)
+        // }
+        $("ul li input:not(:checked)").prop("checked", true)
+        a.prop("checked", false)
+    })
+</script>
+
+
+</html>

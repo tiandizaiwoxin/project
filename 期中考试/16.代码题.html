@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = '85872637471533203552943982'
+        var newObj = {};
+        for (var i = 0; i < str.length; i++) {
+            if (!newObj[str[i]]) {
+                newObj[str[i]] = 1
+            } else {
+                newObj[str[i]]++
+            }
+        }
+        var maxNum = 0
+        var maxI = 0
+        var newStr = ''
+        for (var k in newObj) {
+            newStr += k
+            if (newObj[k] > maxNum) {
+                maxNum = newObj[k]
+                maxI = k
+            }
+        }
+        console.log('出现次数最多的数字是：' + maxI + '；它出现了' + maxNum + '次');
+        console.log(newStr);
+    </script>
+</body>
+
+</html>
